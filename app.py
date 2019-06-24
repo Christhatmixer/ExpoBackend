@@ -31,3 +31,26 @@ def getPresenters():
     finally:
         connection.close()
     return jsonify(result)
+
+
+@app.route('/getPresenterProducts', methods=['GET', 'POST'])
+def getPresenterProducts():
+    connection = psycopg2.connect(app.config["DATABASE_URL"])
+
+    data = request.json
+    dict_cur = connection.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+    try:
+        with dict_cur as cursor:
+            sql = "SELECT * FROM products WHERE name = %s"
+
+            cursor.execute(sql, (data["name"],))
+            result = cursor.fetchone()
+
+            print(result)
+
+            connection.commit()
+    finally:
+        connection.close()
+
+    return jsonify(result)
