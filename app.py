@@ -43,7 +43,7 @@ def getPresenterProducts():
 
     try:
         with dict_cur as cursor:
-            sql = "SELECT * FROM products WHERE name = %s"
+            sql = "SELECT * FROM products WHERE creator = %s"
 
             cursor.execute(sql, (data["name"],))
             result = cursor.fetchall()
