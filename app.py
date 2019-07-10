@@ -46,7 +46,7 @@ def getPresenterProducts():
             sql = "SELECT * FROM products WHERE name = %s"
 
             cursor.execute(sql, (data["name"],))
-            result = cursor.fetchone()
+            result = cursor.fetchall()
 
             print(result)
 
